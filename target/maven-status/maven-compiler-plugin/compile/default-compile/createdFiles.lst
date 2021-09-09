@@ -1,0 +1,15 @@
+py/com/ci/colegio/examen/product/boundary/ProductManager.class
+py/com/ci/colegio/examen/client/controller/ClientController.class
+py/com/ci/colegio/examen/product/controller/ProductController.class
+py/com/ci/colegio/examen/client/boundary/ClientManager.class
+py/com/ci/evaluation/examen/utils/test.class
+py/com/ci/colegio/examen/presentation/console/ProductUI.class
+py/com/ci/colegio/examen/product/entities/Product.class
+py/com/ci/colegio/examen/presentation/console/ClientUI.class
+py/com/ci/colegio/examen/presentation/web/beans/LoginBean.class
+py/com/ci/colegio/examen/client/entities/Client.class
+py/com/ci/colegio/examen/user/entities/SystemUser.class
+py/com/ci/colegio/examen/presentation/web/servlet/TestServlet.class
+py/com/ci/colegio/examen/presentation/web/beans/ProductBean.class
+py/com/ci/colegio/examen/utils/ConnectionManager.class
+py/com/ci/colegio/examen/presentation/web/beans/ClientBean.class

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <ui:define name="content">
+                <h:form id="client-form">
+
+                    <div class="card">
+                        <p:dataTable id="dtClient" var="client" value="#{clientBean.clientList}"
+                                     rows="10" paginator="true" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15"
+                                     selection="#{clientBean.client}" rowKey="#{client.clientId}"
+                                     selectionMode="single">
+                            <p:column headerText="Client ID">
+                                <h:outputText id="clientId" value="#{client.clientId}" />
+                            </p:column>
+
+                            <p:column headerText="Name">
+                                <h:outputText id="clientName" value="#{client.clientName}" />
+                            </p:column>
+
+                            <p:column headerText="Last Name">
+                                <h:outputText id="clientLastname" value="#{client.clientLastname}" />
+                            </p:column>
+
+                            <p:column headerText="Phone">
+                                <h:outputText id="clientPhone" value="#{client.clientPhone}" />
+                            </p:column>
+
+                            <p:column headerText="Address">
+                                <h:outputText id="clientAddress" value="#{client.clientAddress}" />
+                            </p:column>
+
+                            <p:column headerText="Actions">
+                                <p:commandButton process="dtClient" icon="ui-icon-document" update=":form-update:updateClient" 
+                                                 value="Update"  oncomplete="PF('dlgClientUpdate').show()"/>
+                                <p:commandButton 
+                                    value="Delete" 
+                                    update="client-form" 
+                                    actionListener="#{clientBean.deleteClient()}"
+                                    id="btn-delete-client">
+                                </p:commandButton>                       
+                            </p:column>
+
+                            <p:ajax event="rowSelect" listener="#{clientBean.onSelect}"  />
+
+                        </p:dataTable>
+                    </div>
+                </h:form>
+
+
+                <h5>Add Client</h5>
+                <h:form id="form-add">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    <p:panelGrid columns="5" columnClasses="column" id="addClient">                            
+
+                        <p:outputLabel value="Client Name" for="clientName" />
+                        <p:outputLabel value="Client LastName" for="clientLastname" />
+                        <p:outputLabel value="Client Phone" for="clientPhone" />
+                        <p:outputLabel value="Client Address" for="clientAddress" />
+
+                        <h:inputHidden id="clientId" value="#{clientBean.client.clientId}"/>
+                        <p:inputText id="clientName" required="true" value="#{clientBean.client.clientName}"  style="text-transform: none" />
+                        <p:inputText id="clientLastname" required="true" value="#{clientBean.client.clientLastname}"  style="text-transform: none" />
+                        <p:inputText id="clientPhone" required="true" value="#{clientBean.client.clientPhone}"  style="text-transform: none" />
+                        <p:inputText id="clientAddress" required="true" value="#{clientBean.client.clientAddress}"  style="text-transform: none" />
+
+                        <p:commandButton 
+                            value="Save" 
+                            update="form-add,client-form" 
+                            actionListener="#{clientBean.addClient()}"
+                            id='btn-save-client'
+                            />
+                    </p:panelGrid>
+                </h:form>               	
+
+
+                <p:dialog header="Update" widgetVar="dlgClientUpdate" modal="true" showEffect="fade" resizable="false">
+                    <h:form id="form-update" >
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                        <p:panelGrid columns="5" columnClasses="column" id="updateClient">                            
+
+                            <p:outputLabel value="Client Name" for="clientName" />
+                            <p:outputLabel value="Client LastName" for="clientLastname" />
+                            <p:outputLabel value="Client Phone" for="clientPhone" />
+                            <p:outputLabel value="Client Address" for="clientAddress" />
+
+                            <h:inputHidden id="clientId" value="#{clientBean.client.clientId}"/>
+                            <p:inputText id="clientName" required="true" value="#{clientBean.client.clientName}"  style="text-transform: none" />
+                            <p:inputText id="clientLastname" required="true" value="#{clientBean.client.clientLastname}"  style="text-transform: none" />
+                            <p:inputText id="clientPhone" required="true" value="#{clientBean.client.clientPhone}"  style="text-transform: none" />
+                            <p:inputText id="clientAddress" required="true" value="#{clientBean.client.clientAddress}"  style="text-transform: none" />
+
+
+                            <p:commandButton 
+                                value="Save" 
+                                actionListener="#{clientBean.updateClient()}"
+                                id="btn-update-client"
+                                update="form-update,client-form" 
+                                oncomplete="PF('dlgClientUpdate').hide()"
+                                />
+                        </p:panelGrid>
+
+
+                    </h:form>	
+
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

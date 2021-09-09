@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <ui:define name="content">
+                <h:form id="product-form">
+
+                    <div class="card">
+                        <p:dataTable id="dtProduct" var="product" value="#{productBean.productList}"
+                                     rows="10" paginator="true" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15"
+                                     selection="#{productBean.product}" rowKey="#{product.productId}"
+                                     selectionMode="single">
+                            <p:column headerText="Product Id">
+                                <h:outputText id="productId" value="#{product.productId}"/>
+                            </p:column>
+
+                            <p:column headerText="Product Name"> 
+                                <h:outputText id="productName" value="#{product.productName}"/>
+                            </p:column>
+
+                            <p:column headerText="Product Description">
+                                <h:outputText id="ProductDescription" value="#{product.procuctDescription}"/>
+                            </p:column>
+
+                            <p:column headerText="Actions">
+                                <p:commandButton process="dtProduct" icon="ui-icon-document" update=":form-update:updateProduct" 
+                                                 value="Update"  oncomplete="PF('dlgProductUpdate').show()"/>
+                                <p:commandButton 
+                                    value="Delete" 
+                                    update="product-form" 
+                                    actionListener="#{productBean.deleteProduct()}"
+                                    id="btn-delete-product">
+                                </p:commandButton>                       
+                            </p:column>
+
+                            <p:ajax event="rowSelect" listener="#{productBean.onSelect}"  />
+
+                        </p:dataTable>
+                    </div>
+                </h:form>
+
+
+                <h5>Add product</h5>
+                <h:form id="form-add">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    <p:panelGrid columns="3" columnClasses="column" id="addProduct">                            
+
+                        <p:outputLabel value="Product Name" for="productName" />
+                        <p:outputLabel value="Product Description" for="productDescription" />
+
+                        <h:inputHidden value="#{productBean.product.productId}"/>
+                        <p:inputText id="productName" required="true" value="#{productBean.product.productName}"  style="text-transform: none" />
+                        <p:inputText id="productDescription" required="true" value="#{productBean.product.procuctDescription}"  style="text-transform: none" />
+
+                        <p:commandButton 
+                            value="Save" 
+                            update="form-add,:product-form" 
+                            actionListener="#{productBean.addProduct()}"
+                            id='btn-save-account'
+                            />
+                    </p:panelGrid>
+                </h:form>               	
+
+
+                <p:dialog header="Update" widgetVar="dlgProductUpdate" modal="true" showEffect="fade" resizable="false">
+                    <h:form id="form-update" >
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                        <p:panelGrid columns="3" columnClasses="column" id="updateProduct">                            
+
+                            <p:outputLabel value="Product Name" for="productName" />
+                        <p:outputLabel value="Product Description" for="productDescription" />
+
+                        <h:inputHidden value="#{productBean.product.productId}"/>
+                        <p:inputText id="productName" required="true" value="#{productBean.product.productName}"  style="text-transform: none" />
+                        <p:inputText id="productDescription" required="true" value="#{productBean.product.procuctDescription}"  style="text-transform: none" />
+
+                            <p:commandButton 
+                                value="Save" 
+                                actionListener="#{productBean.updateProduct()}"
+                                id="btn-update-product"
+                                update="form-update,:product-form" 
+                                oncomplete="PF('dlgProductUpdate').hide()"
+                                />
+                        </p:panelGrid>
+
+
+                    </h:form>	
+
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
