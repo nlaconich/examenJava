@@ -70,7 +70,7 @@ public class ProductBean implements Serializable{
     public void onSelect(SelectEvent event) {
         this.product = (Product) event.getObject();
 
-        FacesMessage msg = new FacesMessage("Client Selected id", String.valueOf(product.getProductId()));
+        FacesMessage msg = new FacesMessage("Product Selected id", String.valueOf(product.getProductId()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
         System.out.println("ProductBean > Select Row > " + this.product);
 

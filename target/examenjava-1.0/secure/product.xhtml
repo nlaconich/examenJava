@@ -70,13 +70,13 @@ and open the template in the editor.
                             value="Save" 
                             update="form-add,:product-form" 
                             actionListener="#{productBean.addProduct()}"
-                            id='btn-save-account'
+                            id='btn-save-product'
                             />
                     </p:panelGrid>
                 </h:form>               	
 
 
-                <p:dialog header="Update" widgetVar="dlgProductUpdate" modal="true" showEffect="fade" resizable="false">
+                <p:dialog header="Update" widgetVar="dlgProductUpdate" modal="true" showEffect="fade" resizable="false" width="500px">
                     <h:form id="form-update" >
                         <p:messages id="messages" showDetail="true" autoUpdate="true" />
                         <p:panelGrid columns="3" columnClasses="column" id="updateProduct">                            

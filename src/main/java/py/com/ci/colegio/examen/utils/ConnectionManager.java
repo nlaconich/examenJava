@@ -15,7 +15,7 @@ public class ConnectionManager {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost/db_colegio", "developer", "developer");
+                    "jdbc:postgresql://localhost/db_examen", "developer", "developer");
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;

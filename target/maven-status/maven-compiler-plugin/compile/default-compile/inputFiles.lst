@@ -1,4 +1,5 @@
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/product/entities/Product.java
+/home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/sale/controller/SaleController.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/presentation/web/beans/ClientBean.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/presentation/web/beans/LoginBean.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/product/controller/ProductController.java
@@ -9,7 +10,9 @@
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/presentation/web/beans/ProductBean.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/presentation/console/ClientUI.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/utils/ConnectionManager.java
-/home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/utils/test.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/presentation/web/servlet/TestServlet.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/client/controller/ClientController.java
+/home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/presentation/web/beans/SaleBean.java
 /home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/product/boundary/ProductManager.java
+/home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/sale/boundary/SaleManager.java
+/home/nick/NetBeansProjects/examenjava/src/main/java/py/com/ci/colegio/examen/sale/entities/Sale.java

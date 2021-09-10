@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/base.xhtml">
+            <ui:define name="content">
+                <h:form id="sale-form">
+
+                    <div class="card">
+                        <p:dataTable id="dtSale" var="sale" value="#{saleBean.saleList}"
+                                     rows="10" paginator="true" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15"
+                                     selection="#{saleBean.sale}" rowKey="#{sale.saleId}"
+                                     selectionMode="single">
+                            <p:column headerText="Sale Id">
+                                <h:outputText id="saleId" value="#{sale.saleId}"/>
+                            </p:column>
+
+                            <p:column headerText="Client Id"> 
+                                <h:outputText id="clientId" value="#{sale.clientId}"/>
+                            </p:column>
+
+                            <p:column headerText="Product Id">
+                                <h:outputText id="productId" value="#{sale.productId}"/>
+                            </p:column>
+
+                            <p:column headerText="Actions">
+                                <p:commandButton process="dtSale" icon="ui-icon-document" update=":form-update:updateSale" 
+                                                 value="Update"  oncomplete="PF('dlgSaleUpdate').show()"/>
+                                <p:commandButton 
+                                    value="Delete" 
+                                    update="sale-form" 
+                                    actionListener="#{saleBean.deleteSale()}"
+                                    id="btn-delete-sale">
+                                </p:commandButton>                       
+                            </p:column>
+
+                            <p:ajax event="rowSelect" listener="#{saleBean.onSelect}"  />
+
+                        </p:dataTable>
+                    </div>
+                </h:form>
+
+
+                <h5>Add sale</h5>
+                <h:form id="form-add">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    <p:panelGrid columns="3" columnClasses="column" id="addSale">                            
+
+                        <p:outputLabel value="Client Id" for="clientId" />
+                        <p:outputLabel value="Product Id" for="productId" />
+
+                        <h:inputHidden value="#{saleBean.sale.saleId}"/>
+                        <p:inputText id="clientId" required="true" value="#{saleBean.sale.clientId}"  style="text-transform: none" />
+                        <p:inputText id="productId" required="true" value="#{saleBean.sale.productId}"  style="text-transform: none" />
+
+                        <p:commandButton 
+                            value="Save" 
+                            update="form-add,:sale-form" 
+                            actionListener="#{saleBean.addSale()}"
+                            id='btn-save-sale'
+                            />
+                    </p:panelGrid>
+                </h:form>               	
+
+
+                <p:dialog header="Update" widgetVar="dlgSaleUpdate" modal="true" showEffect="fade" resizable="false">
+                    <h:form id="form-update" >
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                        <p:panelGrid columns="3" columnClasses="column" id="updateSale">                            
+
+                            <p:outputLabel value="Client Id" for="clientId" />
+                            <p:outputLabel value="Product Id" for="productId" />
+
+                            <h:inputHidden value="#{saleBean.sale.saleId}"/>
+                            <p:inputText id="clientId" required="true" value="#{saleBean.sale.clientId}"  style="text-transform: none" />
+                            <p:inputText id="productId" required="true" value="#{saleBean.sale.productId}"  style="text-transform: none" />
+
+                            <p:commandButton 
+                                value="Save" 
+                                actionListener="#{saleBean.updateSale()}"
+                                id="btn-update-sale"
+                                update="form-update,:sale-form" 
+                                oncomplete="PF('dlgSaleUpdate').hide()"
+                                />
+                        </p:panelGrid>
+
+
+                    </h:form>	
+
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
